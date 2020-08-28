@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %} {% endblock %}</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="{% static 'css/nifty.min.css' %}" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="{% static 'css/demo/nifty-demo-icons.min.css' %}" rel="stylesheet">
+
+
+    <!--=================================================-->
+
+
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="{% static 'plugins/pace/pace.min.css' %}" rel="stylesheet">
+    <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="{% static 'css/demo/nifty-demo.min.css' %}" rel="stylesheet">
+
+    {% block css%}
+    {% endblock %}
+
+
+
+    <!--=================================================
+
+    REQUIRED
+    You must include this in your project.
+
+
+    RECOMMENDED
+    This category must be included but you may modify which plugins or components which should be included in your project.
+
+
+    OPTIONAL
+    Optional plugins. You may choose whether to include it in your project or not.
+
+
+    DEMONSTRATION
+    This is to be removed, used for demonstration purposes only. This category must not be included in your project.
+
+
+    SAMPLE
+    Some script samples which explain how to initialize plugins or components. This category should not be included in your project.
+
+
+    Detailed information and more samples can be found in the document.
+
+    =================================================-->
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+<body>
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar" style="position: fixed;">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand">
+                        <div class="brand-title">
+                            <span class="brand-text">SKRIPSI</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content">
+                    <ul class="nav navbar-top-links" style="float:left;">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-list-view"></i>
+                            </a>
+                        </li>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End Navigation toogle button-->
+
+
+
+
+
+                    </ul>
+
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            {% block content %}
+            {% endblock %}
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+
+            <!--ASIDE-->
+            <!--===================================================-->
+
+            <!--===================================================-->
+            <!--END ASIDE-->
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+
+                    <!--OPTIONAL : ADD YOUR LOGO TO THE NAVIGATION-->
+                    <!--It will only appear on small screen devices.-->
+                    <!--================================
+                    <div class="mainnav-brand">
+                        <a href="index.html" class="brand">
+                            <img src="img/logo.png" alt="Nifty Logo" class="brand-icon">
+                            <span class="brand-text">Nifty</span>
+                        </a>
+                        <a href="#" class="mainnav-toggle"><i class="pci-cross pci-circle icon-lg"></i></a>
+                    </div>
+                    -->
+
+
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+
+                                <!--Profile Widget-->
+                                <!--================================-->
+                                <div id="mainnav-profile" class="mainnav-profile">
+                                    <div class="profile-wrap text-center">
+                                        <div class="pad-btm">
+                                            <img class="img-circle img-md" src="{% static 'img/profile-photos/11.png' %}" alt="Profile Picture">
+                                        </div>
+                                        <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
+                                            <span class="pull-right dropdown-toggle">
+                                                <i class="dropdown-caret"></i>
+                                            </span>
+                                            <p class="mnp-name">Wahyu Destian W</p>
+                                            <span class="mnp-desc">4611416045</span>
+                                        </a>
+                                    </div>
+                                    <div id="profile-nav" class="collapse list-group bg-trans">
+                                        <!-- <a href="#" class="list-group-item">
+                                            <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <i class="demo-pli-information icon-lg icon-fw"></i> Help
+                                        </a> -->
+                                        <a href="{% url 'logout' %}" class="list-group-item">
+                                            <i class="demo-pli-unlock icon-lg icon-fw"></i> Logout
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
+
+                                <ul id="mainnav-menu" class="list-group">
+
+						            <!--Category name-->
+						            <li class="list-header">Navigation</li>
+
+						            <!--Menu list item-->
+                        <li class="{% block dashboard %} {% endblock %}">
+						                <a href="{% url 'administrator:index' %}">
+						                    <i class="demo-pli-home"></i>
+                                <span class="menu-title">Dashboard</span></a>
+						            </li>
+
+
+						            <!--Menu list item-->
+						            <li class="{% block sentimen %} {% endblock %}">
+						                <a href="{% url 'administrator:sentimen' %}">
+						                    <i class="demo-pli-folder-with-document"></i>
+						                    <span class="menu-title">
+												Dataset
+											</span>
+						                </a>
+						            </li>
+                                    <!--Menu list item-->
+                                    <li class="{% block hasil %} {% endblock %}">
+                                        <a href="{% url 'administrator:hasil' %}">
+                                            <i class="demo-pli-file-txt"></i>
+                                            <span class="menu-title">
+                                                Text Pre-processing
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li class="{% block fitur %} {% endblock %}">
+                                        <a href="{% url 'administrator:fitur' %}">
+                                            <i class="demo-pli-file-search"></i>
+                                            <span class="menu-title">
+                                                Information Gain
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li class="{% block SVM %} {% endblock %}">
+                                        <a href="{% url 'administrator:SVM' %}">
+                                            <i class="demo-psi-bar-chart"></i>
+                                            <span class="menu-title">
+                                                Klasifikasi SVM
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li class="{% block SVMRBF %} {% endblock %}">
+                                        <a href="{% url 'administrator:SVMRBF' %}">
+                                            <i class="demo-psi-bar-chart"></i>
+                                            <span class="menu-title">
+                                                Klasifikasi SVM RBF
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li class="{% block SVMRBFIG %} {% endblock %}">
+                                        <a href="{% url 'administrator:SVMRBFIG' %}">
+                                            <i class="demo-psi-bar-chart"></i>
+                                            <span class="menu-title">
+                                                Klasifikasi SVM RBF IG
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li class="{% block tentang %} {% endblock %}">
+                                        <a href="{% url 'administrator:tentang' %}">
+                                            <i class="demo-pli-idea"></i>
+                                            <span class="menu-title">
+                                                About
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+						                                         </ul>
+
+
+                                <!--Widget-->
+                                <!--================================-->
+
+                                <!--================================-->
+                                <!--End widget-->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer" style="position: fixed;">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pad-rgt pull-right">
+                You have <a href="#" class="text-main"><span class="badge badge-danger">3</span> pending action.</a>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2020 Klasifikasi Analisis Sentimen Movie Review</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+
+
+
+
+
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="{% static 'js/nifty.min.js' %}"></script>
+
+
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="{% static 'js/demo/nifty-demo.min.js' %}"></script>
+
+
+
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="{% static 'plugins/sparkline/jquery.sparkline.min.js' %}"></script>
+
+
+
+
+    {% block js %}
+    {% endblock %}
+
+
+
+
+</body>
+</html>

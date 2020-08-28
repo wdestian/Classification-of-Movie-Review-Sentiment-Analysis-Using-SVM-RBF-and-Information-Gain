@@ -1,0 +1,61 @@
+{% extends "layouts/administrator.html" %}
+{% load static %}
+
+{% block tentang %}
+active-sub
+{% endblock %}
+
+{% block title %}
+Dashboard | Klasifikasi Analisis Sentimen Movie Review
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    
+<div id="page-content">
+    <div class="col-md-9">
+        <div class="panel">
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-information"></i>
+              About Sistem</h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  Sistem ini dibuat sebagai alat untuk pengujian algoritma yang diusulkan dalam penyusunan skripsi yang berjudul "Klasifikasi Analisis Sentimen <em>Movie Review</em> Dengan Metode <em>Support Vector Machine</em> Menggunakan Kernel <em>Radial Basis Function</em> dan <em>Information Gain</em>"
+                </div>
+            </div>
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-gear"></i>
+              Metode</h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  Algoritma klasifikasi yang digunakan adalah algoritma SVM. Terdapat empat analisis data yaitu: <em>text pre-processing</em> menggunakan <em>tokenize, filter token, filter stopwords,</em> dan <em>stemming</em>. <em>Word vectorization</em> menggunakan TF-IDF. Menerapkan kernel RBF pada SVM dan <em>feature selection</em> dengan <em>information gain</em>. <em>Dataset</em> yang digunakan adalah: <em>Data Movie Review Polarity Dataset V2.0</em> yang diperoleh dari http://www.cs.cornell.edu/people/pabo/- movie-review-data
+                </div>
+            </div>
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-home"></i>
+              Menu Dashboard</h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  Menu dashboard merupakan halaman awal sistem yang menampilkan judul penelitian dan tersedia navigasi bar untuk memilih menu analisis sentimen
+                </div>
+            </div>
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-computer-secure"></i>
+              Menu Analisis Sentimen</h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                  Pada menu ini yang termasuk di dalamnya yaitu menu Dataset, menu Text Pre-processing, menu Information Gain, menu Klasifikasi SVM, menu Klasifikasi SVM RBF, dan menu Klasifikasi SVM RBF IG. yaitu menu-menu yang digunakan untuk melakukan pengujian data 
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--===================================================-->
+    <!--End page content-->
+
+{% endblock %}

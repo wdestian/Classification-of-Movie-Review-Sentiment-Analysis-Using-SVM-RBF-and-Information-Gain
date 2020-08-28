@@ -1,0 +1,351 @@
+{% extends "layouts/administrator.html" %}
+{% load static %}
+
+{% block SVMRBFIG %}
+active-sub
+{% endblock %}
+
+{% block title %}
+Hasil | Klasifikasi Analisis Sentimen Movie Review
+{% endblock %}
+
+{% block css %}
+<!--DataTables [ OPTIONAL ]-->
+<link href="{% static 'plugins/datatables/media/css/dataTables.bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css' %}" rel="stylesheet">
+<!--Animate.css [ OPTIONAL ]-->
+<link href="{% static 'plugins/animate-css/animate.min.css' %}" rel="stylesheet">
+
+  <link href="{% static "plugins/dropify/css/dropify.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    <div id="page-head">
+
+<div class="pad-all text-center">
+<h3>Hasil Klasifikasi Algoritma SVM Kernel RBF & IG</h3>
+<p>AKURASI & CONFUSION MATRIX</p>
+</div>
+        </div>
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+              <div class="row">
+    <div class="col-sm-6">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Input Parameter</h3>
+        </div>
+        <form method="GET" action="{% url 'administrator:klasifikasi' %}">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Paramter C</label>
+                  <input type="text" class="form-control" name="num1">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Paramter gamma</label>
+                  <input type="text" class="form-control" name="num2">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Top K</label>
+                  <input type="text" class="form-control" name="num3">
+                </div>
+              </div>              
+            </div>
+          </div>
+          <div class="panel-footer text-right">
+            <button class="btn btn-primary" type="submit">Klasifikasi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  <div class="panel">
+          <div class="panel-heading">
+              <h3 class="panel-title">Result SVM RBF Kernel + IG</h3>
+          </div>
+          <div class="panel-body demo-nifty-btn">
+            <table id="demo-dt-basic3" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Akurasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{akurasi_ig}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+</div>
+<div class="panel">
+          <div class="panel-heading">
+              <h3 class="panel-title">Confusion Matrix SVM RBF Kernel + IG</h3>
+          </div>
+          <div class="panel-body demo-nifty-btn">
+            <table id="demo-dt-basic4" class="table table-striped table-bordered" cellspacing="0" width="100%">
+               <thead>
+                    <tr>
+                    <th>  </th>
+                    <th> Predicted Neg </th>
+                    <th> Predicted Pos </th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for key, acc, true_negative, false_positive, false_negative, true_positive in matrix_ig.values %}
+                  <tr>
+                    <td> <b>Actual Neg</b> </td>
+                    <td> {{true_negative}} </td>
+                    <td> {{false_positive}} </td>
+                    </tr>
+                    <tr>
+                    <td> <b>Actual Pos</b> </td>
+                    <td> {{false_negative}} </td>
+                   <td> {{true_positive}} </td>
+                   </tr>
+                </tbody>
+            </table>
+            </div>
+            {% endfor %}
+</div>
+    <!--===================================================-->
+    <!--End page content-->
+
+</div>
+
+<div id="demo-lg-modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-lg animated bounceIn">
+          <div class="modal-content">
+            <form class="formValidate2" id="formValidate2" name="form_tambah" method="post" action="{% url 'administrator:sentimen' %}" enctype="multipart/form-data">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                  <h4 class="modal-title" id="myLargeModalLabel">Import Dataset</h4>
+              </div>
+              <div class="modal-body">
+
+                  {% csrf_token %}
+                <div class="row section">
+            <div class="col-sm-12">
+                <p>Upload Dataset (Maximum file upload size 10MB).</p>
+                <input type="file" name="data" class="dropify" data-show-remove="false" data-allowed-file-extensions="csv" data-max-file-size="10M" required />
+                    </div>
+            </div>
+
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+              </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+
+ <!--DataTables [ OPTIONAL ]-->
+ <script src="{% static 'plugins/datatables/media/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/media/js/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js' %}"></script>
+
+
+ <!--DataTables Sample [ SAMPLE ]-->
+<script type="text/javascript">
+
+  // Tables-DataTables.js
+  // ====================================================================
+  // This file should not be included in your project.
+  // This is just a sample how to initialize plugins or components.
+  //
+  // - ThemeOn.net -
+
+
+
+  $(document).on('nifty.ready', function() {
+
+
+      // DATA TABLES
+      // =================================================================
+      // Require Data Tables
+      // -----------------------------------------------------------------
+      // http://www.datatables.net/
+      // =================================================================
+
+      $.fn.DataTable.ext.pager.numbers_length = 5;
+
+
+      // Basic Data Tables with responsive plugin
+      // -----------------------------------------------------------------
+      $('#demo-dt-basic').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic2').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic3').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic4').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+      $('#demo-dt-basic5').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+      $('#demo-dt-basic6').dataTable( {
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      } );
+
+
+
+
+
+      // Row selection (single row)
+      // -----------------------------------------------------------------
+      var rowSelection = $('#demo-dt-selection').DataTable({
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          }
+      });
+
+      $('#demo-dt-selection').on( 'click', 'tr', function () {
+          if ( $(this).hasClass('selected') ) {
+              $(this).removeClass('selected');
+          }
+          else {
+              rowSelection.$('tr.selected').removeClass('selected');
+              $(this).addClass('selected');
+          }
+      } );
+
+
+
+
+
+
+      // Row selection and deletion (multiple rows)
+      // -----------------------------------------------------------------
+      var rowDeletion = $('#demo-dt-delete').DataTable({
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          },
+          "dom": '<"toolbar">frtip'
+      });
+      $('#demo-custom-toolbar').appendTo($("div.toolbar"));
+
+      $('#demo-dt-delete tbody').on( 'click', 'tr', function () {
+          $(this).toggleClass('selected');
+      } );
+
+      $('#demo-dt-delete-btn').click( function () {
+          rowDeletion.rows('.selected').remove().draw( false );
+      } );
+
+
+
+
+
+
+      // Add Row
+      // -----------------------------------------------------------------
+      var t = $('#demo-dt-addrow').DataTable({
+          "responsive": true,
+          "language": {
+              "paginate": {
+                "previous": '<i class="demo-psi-arrow-left"></i>',
+                "next": '<i class="demo-psi-arrow-right"></i>'
+              }
+          },
+          "dom": '<"newtoolbar">frtip'
+      });
+      $('#demo-custom-toolbar2').appendTo($("div.newtoolbar"));
+
+      var randomInt = function(min,max){
+          return Math.floor(Math.random()*(max-min+1)+min);
+      }
+      $('#demo-dt-addrow-btn').on( 'click', function () {
+          t.row.add( [
+              'Adam Doe',
+              'New Row',
+              'New Row',
+              randomInt(1,100),
+              '2015/10/15',
+              '$' + randomInt(1,100) +',000'
+          ] ).draw();
+      } );
+
+
+  });
+
+</script>
+ <!--Bootbox Modals [ OPTIONAL ]-->
+<script src="{% static 'plugins/bootbox/bootbox.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static "plugins/dropify/js/dropify.js" %}"></script>
+
+{% endblock %}

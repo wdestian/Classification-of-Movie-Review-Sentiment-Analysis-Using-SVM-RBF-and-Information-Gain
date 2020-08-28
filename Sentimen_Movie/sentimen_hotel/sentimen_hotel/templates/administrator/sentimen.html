@@ -1,0 +1,159 @@
+{% extends "layouts/administrator.html" %}
+{% load static %}
+
+{% block sentimen %}
+active-sub
+{% endblock %}
+
+{% block title %}
+Sentimen Analisis | Klasifikasi Analisis Sentimen Movie Review
+{% endblock %}
+
+{% block css %}
+<!--DataTables [ OPTIONAL ]-->
+<link href="{% static 'plugins/datatables/media/css/dataTables.bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css' %}" rel="stylesheet">
+<!--Animate.css [ OPTIONAL ]-->
+<link href="{% static 'plugins/animate-css/animate.min.css' %}" rel="stylesheet">
+
+  <link href="{% static "plugins/dropify/css/dropify.css" %}" type="text/css" rel="stylesheet" media="screen,projection">
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    <div id="page-head">
+
+<div class="pad-all text-center">
+<h3>Dataset Movie Review</h3>
+<p>IMPORT DATASET</p>
+</div>
+        </div>
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+      <div class="panel">
+					    <div class="panel-heading">
+					        <h3 class="panel-title">Dataset Movie Review</h3>
+					    </div>
+
+					    <div class="panel-body">
+
+					        <table id="demo-dt-basic" class="table table-striped table-bordered" cellspacing="0" width="100%">
+					            <thead>
+					                <tr>
+
+					                    <th>Text</th>
+					                    <th>Sentimen</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+                        {% for x in dataset %}
+                          <tr>
+                              <td>{{x.0}}</td>
+                              <td>{{x.1}}</td>
+                          </tr>
+                        {% endfor %}
+					            </tbody>
+					        </table>
+					    </div>
+					</div>
+
+
+          <div class="panel">
+    					    <div class="panel-heading">
+    					        <h3 class="panel-title">Import Dataset</h3>
+    					    </div>
+    					    <div class="panel-body demo-nifty-btn">
+                    <button data-target="#demo-lg-modal" data-toggle="modal" class="btn btn-lg btn-primary">Import</button>
+                    </div>
+  </div>
+
+
+  <div class="panel">
+          <div class="panel-heading">
+              <h3 class="panel-title">Process</h3>
+          </div>
+          <div class="panel-body demo-nifty-btn">
+            <a  class="btn btn-lg btn-primary" href="{% url 'administrator:hasil' %}">Text Pre-processing</a>
+            </div>
+</div>
+    <!--===================================================-->
+    <!--End page content-->
+
+</div>
+
+<div id="demo-lg-modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-lg animated bounceIn">
+          <div class="modal-content">
+            <form class="formValidate2" id="formValidate2" name="form_tambah" method="post" action="{% url 'administrator:sentimen' %}" enctype="multipart/form-data">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                  <h4 class="modal-title" id="myLargeModalLabel">Import Dataset</h4>
+              </div>
+              <div class="modal-body">
+
+                  {% csrf_token %}
+                <div class="row section">
+            <div class="col-sm-12">
+                <p>Upload Dataset (Maximum file upload size 10MB).</p>
+                <input type="file" name="data" class="dropify" data-show-remove="false" data-allowed-file-extensions="csv" data-max-file-size="10M" required />
+                    </div>
+            </div>
+
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+              </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+
+ <!--DataTables [ OPTIONAL ]-->
+ <script src="{% static 'plugins/datatables/media/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'plugins/datatables/media/js/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js' %}"></script>
+
+
+ <!--DataTables Sample [ SAMPLE ]-->
+ <script src="{% static 'js/demo/tables-datatables.js' %}"></script>
+ <!--Bootbox Modals [ OPTIONAL ]-->
+<script src="{% static 'plugins/bootbox/bootbox.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static "plugins/dropify/js/dropify.js" %}"></script>
+
+
+ <script>
+$(document).ready(function(){
+    $('.dropify').dropify();
+
+      // Translated
+      $('.dropify-fr').dropify({
+          messages: {
+              default: 'Glissez-déposez un fichier ici ou cliquez',
+              replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+              remove:  'Supprimer',
+              error:   'Désolé, le fichier trop volumineux'
+          }
+      });
+
+      // Used events
+      var drEvent = $('.dropify-event').dropify();
+      drEvent.on('dropify.beforeClear', function(event, element){
+          return confirm("Do you really want to delete \"" + element.filename + "\" ?");
+      });
+
+      drEvent.on('dropify.afterClear', function(event, element){
+          alert('File deleted');
+      });
+        });
+ </script>
+{% endblock %}

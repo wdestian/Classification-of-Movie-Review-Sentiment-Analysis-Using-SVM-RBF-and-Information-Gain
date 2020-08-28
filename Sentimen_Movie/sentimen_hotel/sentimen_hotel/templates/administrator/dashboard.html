@@ -1,0 +1,69 @@
+{% extends "layouts/administrator.html" %}
+{% load static %}
+
+{% block dashboard %}
+active-sub
+{% endblock %}
+
+{% block title %}
+Dashboard | Klasifikasi Analisis Sentimen Movie Review
+{% endblock %}
+
+{% block content %}
+<div id="content-container">
+    <div id="page-head">
+
+<div class="pad-all text-center">
+  <style type="text/css">
+  #img-weli {
+    text-align: center;
+  }
+
+  .img-weli {
+    width: 80px;
+    border-radius:10px;
+  }
+</style>
+      <div id="img-weli"><img src="/assets/img/weli.png" alt="" title="" name="slide" class="img-weli"></div>
+<h3>Klasifikasi Analisis Sentimen <em>Movie Review</em> Dengan Metode <em>Support Vector Machine</em></h3>
+<h3>Menggunakan Kernel <em>Radial Basis Function</em> dan <em>Information Gain</em></h3>
+</div>
+        </div>
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+
+      <div id="page-content">
+    <div class="col-md-9">
+        <div class="panel">
+            <div class="panel-body">
+              <h4 class="panel-title">
+                <i class="demo-pli-information"></i>
+                    Petunjuk Penggunaan</h4>
+                <div id="demo-gen-faq1" class="mar-ver collapse in">
+                1. Siapkan dataset review dengan format .csv yang terdiri dari dua kolom. Kolom pertama untuk review berikan nama "Message" dan kedua untuk sentimen berikan nama "kelas"</br>
+                2. Pilih menu Dataset untuk import data review yang akan digunakan atau untuk mengganti dataset baru</br>
+                3. Lakukan text pre-processing data dengan memilih tombol "Text Pre-processing" pada halaman Dataset
+                </br>
+                4. Lakukan pembobotan fitur dengan memilih tombol "Information Gain" pada halaman Text Pre-processing</br>
+                5. Lakukan pengujian klasifikasi analisis sentimen dengan algoritma SVM pada menu "Klasifikasi SVM"</br>
+                6. Hasil akurasi & confusion matrix akan ditampilkan</br>
+                7. Lakukan pengujian klasifikasi analisis sentimen dengan algoritma SVM kernel RBF pada menu "Klasifikasi SVM RBF"</br>
+                8. Masukkan nilai paramter C dan gamma terlebih dahulu, setelah itu pilih "Process"</br>
+                9. Hasil akurasi & confusion matrix akan ditampilkan</br>
+                10. Lakukan pengujian klasifikasi analisis sentimen dengan algoritma SVM kernel RBF dan IG pada menu "Klasifikasi SVM RBF IG"</br>
+                11. Masukkan nilai paramter C, gamma dan jumlah top k (rentang 1-4999 fitur) terlebih dahulu, setelah itu pilih "Process"</br>
+                12. Hasil akurasi & confusion matrix akan ditampilkan</br>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+    <!--===================================================-->
+    <!--End page content-->
+
+</div>
+{% endblock %}
